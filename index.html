@@ -1,0 +1,90 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="game.css" />
+  <!-- * gör css för alla -->
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Press Start 2P", cursive;
+    }
+  </style>
+</head>
+
+<body id="bg">
+  <!-- red container div -->
+  <div id="mainContainer">
+    <div id="endMenuContainerbg">
+      <div id="endMenu">
+        <div id="playAgain">
+          <p id="playAgainButton" onclick="playAgain()">Menu</p>
+          <p id="quitButton" onclick="quit()">Quit</p>
+        </div>
+      </div>
+    </div>
+    <div id="menuContainerbg">
+      <div id="menuContainer">
+        <div id="menuButtons">
+          <p id="playButton" onclick="game()">Play</p>
+          <p id="controllButton" onclick="showControls()">Controls</p>
+          <p id="quitButton" onclick="quit()">Quit</p>
+        </div>
+      </div>
+    </div>
+    <!-- smaller red container div -->
+    <div id="mediumContainer" style="display: none">
+      <div id="smallerContainer">
+        <!-- player health -->
+        <div id="playerHealthBorder">
+          <div
+            style="background-color: rgb(251, 0, 0); height: 30px; width: 100%"
+          ></div>
+          <div id="playerHealth"></div>
+        </div>
+        <!-- timer -->
+        <div id="timer"></div>
+        <!-- enemy health -->
+        <div id="enemeyHealthBorder">
+          <div style="background-color: rgb(251, 0, 0); height: 30px"></div>
+          <div id="enemyHealth"></div>
+        </div>
+      </div>
+      <div id="displaytext">Tie</div>
+      <!-- stamina container -->
+      <div id="staminaContainer">
+        <!-- player stamina -->
+        <div id="playerStaminaBorder">
+          <div
+            style="
+              background-color: rgb(185, 185, 185);
+              height: 15px;
+              width: 100%;
+            "
+          ></div>
+          <div id="playerStamina"></div>
+        </div>
+        <!-- spacer -->
+        <div id="spacer"></div>
+        <!-- enemy stamina -->
+        <div id="enemyStaminaBorder">
+          <div style="background-color: rgb(99, 99, 99); height: 15px"></div>
+          <div id="enemyStamina"></div>
+        </div>
+      </div>
+    </div>
+    <canvas></canvas>
+  </div>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="js/classes.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="game.js"></script>
+</body>
