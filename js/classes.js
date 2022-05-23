@@ -18,6 +18,8 @@ class Sprite {
     this.framesHold = 5;
     this.offset = offset;
   }
+
+  //animerar bilder
   draw() {
     c.drawImage(
       this.image,
@@ -32,6 +34,7 @@ class Sprite {
     );
   }
 
+  // håller koll på vilken frame som visas
   animateFrames() {
     this.framesElapsed++;
 
@@ -103,34 +106,24 @@ class fighter extends Sprite {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-
-    console.log(this.sprites);
   }
   update() {
     this.draw();
+    // Ifall man är död kan man inte göra något
     if (!this.dead) {
       this.animateFrames();
       this.staminaRegeneration();
     }
 
-    // // hitbox
-    // if (this.isAttacking) {
-    //   c.fillStyle = "green";
-    //   c.fillRect(
-    //     this.attackBox.position.x,
-    //     this.attackBox.position.y,
-    //     this.attackBox.width,
-    //     this.attackBox.height
-    //   );
-    // }
-
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x; //+ this.direction
+    //ändrar attackbox position
+    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
+    //ändrar position beroende på hastighet
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
 
-    // gravity
+    // gravitation
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
       this.position.y = 330;
@@ -155,6 +148,7 @@ class fighter extends Sprite {
     });
   }
 
+  //Drar lite stamina när man attackerar och beroende på direction spelas olika animationer upp
   attack() {
     if (this.stamina - 33 >= 0) {
       this.stamina -= 33;
@@ -170,6 +164,7 @@ class fighter extends Sprite {
     }
   }
 
+  //Om man blir träffad avgör funktionen om man ska ta skada eller inte och om man dör.
   takesHit() {
     if (timer <= 0) {
       pass;
@@ -188,7 +183,9 @@ class fighter extends Sprite {
     }
   }
 
+  //ändrar animationerna
   swithSprite(sprite) {
+    //Nedanstående if-statements är som en hierarki vilka som prioriteras
     if (this.image === this.sprites.death.image) {
       this.move = true;
       if (this.framesCurrent === this.sprites.death.framesMax - 1)
@@ -203,8 +200,6 @@ class fighter extends Sprite {
         this.framesCurrent < this.sprites.parryBack.framesMax - 1)
     )
       return;
-
-    //overriding other animations when attacking
     if (
       (this.image === this.sprites.attack1.image &&
         this.framesCurrent < this.sprites.attack1.framesMax - 1) ||
@@ -213,7 +208,6 @@ class fighter extends Sprite {
     )
       return;
 
-    //overriding other animations when hit
     if (
       (this.image === this.sprites.takeHit.image &&
         this.framesCurrent < this.sprites.takeHit.framesMax - 1) ||
